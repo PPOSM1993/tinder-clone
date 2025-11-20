@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useState } from "react";
 import { Button } from "@/components/ui/button"
+import { createClient } from "@/lib/supabase/client";
 
 export default function AuthPage() {
 
@@ -20,6 +21,38 @@ export default function AuthPage() {
     const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
+    const supabase = createClient();
+
+    async function handleAuth(e: React.FormEvent) {
+        e.preventDefault();
+
+        setLoading(true);
+        setError("");
+
+        try {
+            if (isSignUp) {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password
+                });
+                if (error) throw error;
+                if (data.user && !data.session) {
+                    setError("Please check your email for a confirmation link");
+                    return;
+                }
+            } else {
+                const { error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+                if (error) throw error;
+            }
+        } catch (error: any) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <>
