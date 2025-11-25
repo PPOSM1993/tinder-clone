@@ -98,7 +98,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-red-50 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-pink-50 to-red-50 dark:from-gray-900 dark:to-gray-800">
         <header className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             My Profile
@@ -253,7 +253,7 @@ export default function ProfilePage() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
                     <span className="text-gray-900 dark:text-white">
-                      Username
+                      Username: 
                     </span>
                     <span className="text-gray-500 dark:text-gray-400">
                       @{profile.username}
