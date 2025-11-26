@@ -1,11 +1,7 @@
 "use server"
-
 import { UserProfile } from "@/app/profile/page";
 import { createClient } from "../supabase/server"
 
-
-
-//Get current user profile
 export async function getCurrentUserProfile() {
     const supabase = await createClient()
 
@@ -31,7 +27,6 @@ export async function getCurrentUserProfile() {
     return profile
 
 }
-
 
 export async function updateUserProfile(profileData: Partial<UserProfile>) {
     const supabase = await createClient();
@@ -64,9 +59,6 @@ export async function updateUserProfile(profileData: Partial<UserProfile>) {
 
     return { success: true };
 }
-
-
-//Upload profile photo
 
 export async function uploadProfilePhoto(file: File) {
     const supabase = await createClient();
