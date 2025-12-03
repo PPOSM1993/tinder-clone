@@ -16,7 +16,7 @@ export default function MatchCard({ user }: { user: UserProfile }) {
                         className={`object-cover transition-opacity duration-300`}
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
 
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                         <div className="flex items-end justify-between">
@@ -25,7 +25,7 @@ export default function MatchCard({ user }: { user: UserProfile }) {
                                     {user.full_name}, {calculateAge(user.birthdate)}
                                 </h2>
                                 <p className="text-sm opacity-90 mb-2">@{user.username}</p>
-                                <p className="text-sm leading-relaxed py-4">{user.bio}</p>
+                                <p className="text-sm leading-relaxed py-6">{user.bio}</p>
                             </div>
                         </div>
                     </div>
