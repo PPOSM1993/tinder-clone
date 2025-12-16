@@ -5,6 +5,7 @@ import { createOrGetChannel, createVideoCall, getStreamUserToken } from "@/lib/a
 import { useRouter } from "next/navigation";
 import { RefObject, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Channel, Event, StreamChat } from "stream-chat";
+import VideoCall from "./VideoCall";
 interface Message {
     id: string;
     text: string;
@@ -417,7 +418,50 @@ export default function StreamChatInterface(
                     </form>
                 </div>
 
-                
+                {showIncomingCall && (
+                    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+                        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-sm mx-4 shadow-2xl">
+                            <div className="text-center">
+                                <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 border-4 border-pink-500">
+                                    <img
+                                        src={otherUser.avatar_url}
+                                        alt={otherUser.full_name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                    Incoming Video Call
+                                </h3>
+                                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                    {callerName} is calling you
+                                </p>
+
+                                <div className="flex space-x-4">
+                                    <button
+                                        onClick={handleDeclineCall}
+                                        className="flex-1 bg-red-500 text-white py-3 px-6 rounded-full font-semibold hover:bg-red-600 transition-colors duration-200"
+                                    >
+                                        Decline
+                                    </button>
+                                    <button
+                                        onClick={handleAcceptCall}
+                                        className="flex-1 bg-green-500 text-white py-3 px-6 rounded-full font-semibold hover:bg-green-600 transition-colors duration-200"
+                                    >
+                                        Accept
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {showVideoCall && videoCallId && (
+                    <VideoCall
+                        onCallEnd={handleCallEnd}
+                        callId={videoCallId}
+                        isIncoming={!isCallInitiator}
+                    />
+                )}
 
             </div>
         </>
